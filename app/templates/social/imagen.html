@@ -15,7 +15,7 @@
       <div class="mb-3">
         <label class="form-label">Describe la imagen</label>
         <textarea class="form-control" name="descripcion" rows="4" required
-          placeholder="Ej: mesa de tarot con velas violetas, luna llena de fondo, ambiente místico y cálido"></textarea>
+          placeholder="Ej: mostrador de la cafetería con luz cálida de la mañana"></textarea>
       </div>
       <div class="row g-2 mb-3">
         <div class="col-md-6">
@@ -29,7 +29,7 @@
         <div class="col-md-6">
           <label class="form-label">Tono</label>
           <select class="form-select" name="tono">
-            {% for t in ['místico','cercano','elegante','oscuro'] %}
+            {% for t in ['cercano','profesional','elegante','oscuro'] %}
             <option value="{{ t }}">{{ t }}</option>
             {% endfor %}
           </select>

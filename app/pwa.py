@@ -43,7 +43,7 @@ def register_pwa(app, mount_path=""):
     @app.route("/sw.js")
     def pwa_service_worker():
         root = request.script_root or mount_path
-        body = f"""const CACHE = 'crm-dr-v2';
+        body = f"""const CACHE = 'crm-v3';
 const ROOT = '{root}';
 const PRECACHE = [
   ROOT + '/',

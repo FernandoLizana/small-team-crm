@@ -8,7 +8,7 @@ from .social_publish import enrich_post_from_content
 
 def build_batch_prompt(*, texto_fuente: str, plataforma: str, tono: str, cantidad: int, tema_extra: str = ""):
     extra = f"\nEnfoque adicional: {tema_extra}" if tema_extra else ""
-    return f"""Eres estratega de contenidos para una tarotista en redes sociales.
+    return f"""Eres estratega de contenidos en redes sociales para un pequeño negocio.
 
 A partir del material fuente, crea exactamente {cantidad} publicaciones distintas para {plataforma}.
 Tono: {tono}
@@ -22,7 +22,7 @@ Responde SOLO con un JSON válido (array), sin markdown ni texto extra:
   {{
     "titulo": "título corto",
     "contenido": "copy listo para publicar (2-4 párrafos cortos o bullets)",
-    "hashtags": "#ejemplo #tarot",
+    "hashtags": "#ejemplo #negocio",
     "formato": "post|carrusel|reel|story",
     "angulo": "educativo|tip|promo|inspiracional|mito|pregunta"
   }}
@@ -101,7 +101,7 @@ def generate_posts_from_material(
             tema_extra=tema_extra,
         ),
         system=(
-            "Generas calendarios editoriales para marca personal de tarot. "
+            "Generas calendarios editoriales para pequeños negocios. "
             "Respondes únicamente con JSON válido."
         ),
         temperature=0.8,
@@ -126,7 +126,7 @@ CREATIVE_STYLES = {
     },
     "tip": {
         "label": "Tip visual",
-        "desc": "Tarjeta con consejo espiritual o de tarot",
+        "desc": "Tarjeta con un consejo útil del rubro",
         "aspect": "1:1",
     },
     "story": {
@@ -136,7 +136,7 @@ CREATIVE_STYLES = {
     },
     "variacion": {
         "label": "Variación creativa",
-        "desc": "Remix artístico de tu foto con estética mística",
+        "desc": "Remix artístico de tu foto con la estética de la marca",
         "aspect": "4:5",
     },
 }
@@ -144,9 +144,9 @@ CREATIVE_STYLES = {
 
 def creative_copy_prompt(*, estilo: str, tema: str, plataforma: str, tono: str):
     style = CREATIVE_STYLES.get(estilo, CREATIVE_STYLES["variacion"])
-    return f"""Crea UN post para {plataforma} de una tarotista.
+    return f"""Crea UN post para {plataforma} de un pequeño negocio.
 Estilo visual: {style['label']} — {style['desc']}
-Tema: {tema or 'tarot y espiritualidad'}
+Tema: {tema or 'el servicio principal del negocio'}
 Tono: {tono}
 
 Devuelve en Markdown:
@@ -160,27 +160,27 @@ Devuelve en Markdown:
 
 def creative_image_prompt(*, estilo: str, tema: str, tono: str, idea_visual: str = ""):
     style = CREATIVE_STYLES.get(estilo, CREATIVE_STYLES["variacion"])
-    idea = idea_visual or tema or "tarot espiritual"
+    idea = idea_visual or tema or "el servicio principal del negocio"
     base = {
         "comic": (
-            f"Cómic ilustrado de 3 viñetas sobre {idea}, estilo tarotista, "
-            f"tono {tono}, colores violeta y dorado, sin texto legible en la imagen."
+            f"Cómic ilustrado de 3 viñetas sobre {idea}, "
+            f"tono {tono}, colores de la marca, sin texto legible en la imagen."
         ),
         "meme": (
-            f"Imagen estilo meme espiritual/tarot sobre {idea}, divertida pero respetuosa, "
+            f"Imagen estilo meme sobre {idea}, divertida pero respetuosa, "
             f"alta calidad para Instagram."
         ),
         "tip": (
-            f"Tarjeta visual de tip espiritual sobre {idea}, estética mística elegante, "
-            f"iconos de tarot, luna, velas."
+            f"Tarjeta visual de tip sobre {idea}, estética limpia y elegante, "
+            f"iconos simples del rubro."
         ),
         "story": (
-            f"Imagen vertical story con ambiente místico sobre {idea}, integrando la persona "
-            f"de la foto de referencia en escena de tarot (sin copiar rostro literalmente)."
+            f"Imagen vertical story sobre {idea}, integrando la persona "
+            f"de la foto de referencia en su lugar de trabajo (sin copiar rostro literalmente)."
         ),
         "variacion": (
-            f"Arte creativo inspirado en la foto de referencia, tema {idea}, estilo místico "
-            f"moderno, tarot, aura, sin texto en la imagen."
+            f"Arte creativo inspirado en la foto de referencia, tema {idea}, estilo "
+            f"moderno, sin texto en la imagen."
         ),
     }
     return base.get(estilo, base["variacion"])

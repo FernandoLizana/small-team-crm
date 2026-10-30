@@ -45,13 +45,6 @@ def enriquecer_cliente(c):
         dolor = dolor or "Gestión de citas y recordatorios manuales"
         plan = plan or "Pro"
 
-    elif "delalma" in producto or "alma" in producto or "tarot" in nicho or "espiritual" in nicho:
-        dolor = dolor or "Presencia web dispersa; perfil en directorio sin portal propio de reservas"
-        plan = plan or "Starter"
-        prioridad = "alta" if tiene_web else prioridad
-        siguiente = "Ofrecer portal profesional vinculado a su perfil del código ético"
-        canal = "email" if not tiene_wa and c.email else canal
-
     elif tiene_web and not tiene_wa:
         canal = "email"
         siguiente = "Contactar por email con propuesta de mejora del sitio"

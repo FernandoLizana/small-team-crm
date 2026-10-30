@@ -38,8 +38,8 @@ Devuelve en Markdown:
 No inventes datos. Si falta información, indícalo."""
 
 
-def _tarot_message_prompt(p):
-    return f"""Eres copywriter especialista en venta ética de servicios espirituales para una tarotista.
+def _outreach_message_prompt(p):
+    return f"""Eres copywriter especialista en venta ética de servicios para un pequeño negocio.
 
 Objetivo: crear un primer DM corto, cálido y personalizado para Instagram.
 
@@ -51,7 +51,7 @@ Datos del perfil:
 
 Datos de la oferta:
 - Objetivo de contacto: {p.objetivo or 'No especificado'}
-- Oferta tarotista: {p.oferta or 'Lectura de tarot personalizada'}
+- Oferta: {p.oferta or 'No especificada'}
 - Tono deseado: {p.tono or 'cercano'}
 
 Devuelve SOLO:
@@ -84,8 +84,8 @@ def list_prospects():
 def import_instagram_bulk():
     if request.method == "POST":
         raw = request.form.get("handles", "")
-        objetivo = request.form.get("objetivo") or "Conectar con potencial clienta para lectura de tarot"
-        oferta = request.form.get("oferta") or "Lectura de tarot personalizada"
+        objetivo = request.form.get("objetivo") or "Conectar con un posible cliente"
+        oferta = request.form.get("oferta") or ""
         tono = request.form.get("tono") or "cercano"
         auto_scan = bool(request.form.get("auto_scan"))
 
@@ -225,9 +225,9 @@ def draft_message(pid):
     if is_ai_configured():
         try:
             p.mensaje = generate_text(
-                _tarot_message_prompt(p),
+                _outreach_message_prompt(p),
                 system=(
-                    "Eres especialista en mensajes de prospección por Instagram para una tarotista. "
+                    "Eres especialista en mensajes de prospección por Instagram para pequeños negocios. "
                     "Tu estilo es humano, respetuoso y orientado a conversación real."
                 ),
                 temperature=0.8,
@@ -327,8 +327,8 @@ def import_csv():
                     nombre=f"@{h}",
                     plataforma="instagram",
                     perfil_url=build_profile_url(h),
-                    objetivo=row.get("objetivo") or "Conectar para lectura de tarot",
-                    oferta=row.get("oferta") or "Lectura de tarot personalizada",
+                    objetivo=row.get("objetivo") or "Conectar con un posible cliente",
+                    oferta=row.get("oferta") or "",
                 )
                 db.session.add(p)
                 created += 1

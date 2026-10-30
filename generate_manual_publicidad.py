@@ -218,8 +218,8 @@ def build():
     table_row(pdf, "Campo", "Descripción", header=True)
     table_row(pdf, "Plataforma", "instagram, tiktok, facebook o linkedin.")
     table_row(pdf, "Cantidad", "10, 12 o 15 publicaciones por lote.")
-    table_row(pdf, "Tono", "cercano, místico, profesional, divertido o inspiracional.")
-    table_row(pdf, "Enfoque extra", "Opcional. Ej: promover lecturas de amor, enfoque luna nueva.")
+    table_row(pdf, "Tono", "cercano, profesional, divertido o inspiracional.")
+    table_row(pdf, "Enfoque extra", "Opcional. Ej: promover el servicio estrella, enfoque en temporada alta.")
     table_row(pdf, "Espaciar calendario", "Si está marcado, programa 1 post por día desde mañana a las 10:30.")
     table_row(pdf, "Generar imágenes IA", "Crea imagen para las primeras 5 publicaciones (tarda más).")
 
@@ -273,7 +273,7 @@ def build():
         pdf,
         [
             "Ve a Redes > Mis fotos (o Publicidad > Estudio y sigue el enlace).",
-            "Sube JPG, PNG o WEBP: fotos tuyas, mesa de tarot, servicios, ambiente del consultorio, etc.",
+            "Sube JPG, PNG o WEBP: fotos tuyas, tu lugar de trabajo, servicios, ambiente del local, etc.",
             "Puedes subir varias a la vez.",
             "Vuelve a Publicidad > Estudio creativo.",
         ],
@@ -283,9 +283,9 @@ def build():
     table_row(pdf, "Estilo", "Para qué sirve / formato imagen", header=True)
     table_row(pdf, "Cómic / viñetas", "Historieta 2–4 viñetas. Formato 4:5 (vertical feed).")
     table_row(pdf, "Meme / humor", "Contenido relatable y divertido. Cuadrado 1:1.")
-    table_row(pdf, "Tip visual", "Tarjeta con consejo espiritual o de tarot. Cuadrado 1:1.")
+    table_row(pdf, "Tip visual", "Tarjeta con un consejo útil del rubro. Cuadrado 1:1.")
     table_row(pdf, "Story personal", "Imagen vertical tipo story con tu foto integrada. 9:16.")
-    table_row(pdf, "Variación creativa", "Remix artístico místico de tu foto. Vertical 4:5.")
+    table_row(pdf, "Variación creativa", "Remix artístico de tu foto. Vertical 4:5.")
 
     pdf.ln(3)
     sub(pdf, "5.3 Crear una publicación creativa — paso a paso")
@@ -297,7 +297,7 @@ def build():
             "Escribe el Tema o idea (ej: señales del universo cuando piensas en alguien).",
             "Elige Plataforma: instagram, tiktok o facebook.",
             "Variaciones: crea 1, 2, 3 o 5 publicaciones distintas del mismo estilo.",
-            "Elige el Tono: cercano, místico, divertido o elegante.",
+            "Elige el Tono: cercano, profesional, divertido o elegante.",
             "Marca al menos una de Tus fotos (obligatorio). Puedes elegir 2 para más referencia.",
             "Deja marcado Generar imagen con IA si quieres visual listo (usa tus fotos como inspiración).",
             "Pulsa Crear publicación creativa. Espera unos segundos (aparece overlay de carga IA).",
@@ -321,9 +321,9 @@ def build():
         pdf,
         [
             "Cómic: usa temas con mini-historia (antes / durante / después de una lectura).",
-            "Meme: ideas cotidianas del mundo espiritual que la gente comparta.",
+            "Meme: ideas cotidianas de tu rubro que la gente comparta.",
             "Tip: un solo consejo claro por publicación, fácil de leer en 3 segundos.",
-            "Story: fotos tuyas expresivas o con cartas en la mano.",
+            "Story: fotos tuyas expresivas o trabajando.",
             "Variación: buena para renovar una foto que ya publicaste con look distinto.",
         ],
     )
@@ -375,7 +375,7 @@ def build():
 
     # 5. Casos prácticos
     section(pdf, "7. Casos prácticos")
-    sub(pdf, "Caso 1: Tienes un PDF de 20 páginas sobre tarot")
+    sub(pdf, "Caso 1: Tienes un PDF de 20 páginas sobre tu servicio")
     steps(
         pdf,
         [
@@ -402,10 +402,10 @@ def build():
     steps(
         pdf,
         [
-            "Lunes: Estudio > Cómic, tema lectura de cartas, 1 variación.",
+            "Lunes: Estudio > Cómic, tema tu servicio estrella, 1 variación.",
             "Martes: Estudio > Meme, tema señales del universo.",
             "Miércoles: Estudio > Tip visual, tema autocuidado.",
-            "Jueves: Estudio > Story personal, foto tuya con cartas.",
+            "Jueves: Estudio > Story personal, foto tuya trabajando.",
             "Viernes: Estudio > Variación creativa, remix de tu mejor foto.",
             "Programa cada borrador en Calendario para la semana.",
         ],
@@ -422,7 +422,7 @@ def build():
             "No marques generar imágenes en lotes grandes si tienes prisa (las 5 primeras tardan).",
             "Combina campañas desde documentos (educativo) con estudio creativo (personal).",
             "Mantén Mis fotos actualizado con imágenes de buena calidad y buena luz.",
-            "Varía tonos entre cercano y místico para no sonar repetitiva.",
+            "Varía tonos entre cercano y profesional para no sonar repetitiva.",
         ],
     )
 

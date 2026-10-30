@@ -70,7 +70,7 @@ def extract_material_text(upload_folder: str, *, tipo_archivo: str, rel_path: st
                 file_as_data_url(upload_folder, rel_path),
                 prompt=(
                     "Describe esta imagen o documento visual en español para crear publicaciones "
-                    "de redes sociales de una tarotista. Incluye textos visibles, tema, ideas "
+                    "de redes sociales de un pequeño negocio. Incluye textos visibles, tema, ideas "
                     "clave y mensajes que se podrían comunicar."
                 ),
             )

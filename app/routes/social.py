@@ -29,8 +29,8 @@ def _parse_dt(s):
     return None
 
 
-def _content_prompt_tarot(*, tema, plataforma, tono, formato, cantidad):
-    return f"""Actúa como estratega de contenidos para una tarotista.
+def _content_prompt(*, tema, plataforma, tono, formato, cantidad):
+    return f"""Actúa como estratega de contenidos para un pequeño negocio.
 
 Genera {cantidad} ideas de contenido para {plataforma} en español.
 Tema central: {tema}
@@ -45,7 +45,7 @@ Devuelve en Markdown:
 - Hashtags:
 
 Repite el mismo formato por cada idea.
-Enfócate en contenido útil, ético, espiritual y vendible sin caer en promesas absolutas."""
+Enfócate en contenido útil, ético y vendible sin caer en promesas absolutas."""
 
 
 def _aspect_for_formato(formato):
@@ -56,17 +56,17 @@ def _aspect_for_formato(formato):
     return "1:1"
 
 
-def _tarot_image_prompt(*, tema, tono, formato, titulo=None, with_references=False):
+def _image_prompt(*, tema, tono, formato, titulo=None, with_references=False):
     titulo_txt = titulo or tema
     ref_hint = (
         " Usa las fotos de referencia adjuntas como inspiración de estilo, colores, "
-        "ambiente y servicios de la tarotista. No copies rostros literalmente."
+        "ambiente y servicios del negocio. No copies rostros literalmente."
         if with_references else ""
     )
     return (
-        f"Imagen para Instagram de tarotista, tema: {tema}. "
+        f"Imagen para Instagram de un pequeño negocio, tema: {tema}. "
         f"Título visual: {titulo_txt}. Tono {tono}, formato {formato}. "
-        "Estética mística elegante: cartas de tarot, luna, velas, tonos violeta/dorado, "
+        "Estética limpia y elegante, con los colores de la marca, "
         f"sin texto escrito en la imagen, alta calidad.{ref_hint}"
     )
 
@@ -82,9 +82,9 @@ def _reference_data_urls(reference_paths):
     return urls
 
 
-def _generate_and_save_tarot_image(*, tema, tono, formato, titulo=None, reference_paths=None):
+def _generate_and_save_image(*, tema, tono, formato, titulo=None, reference_paths=None):
     refs = reference_paths or []
-    prompt = _tarot_image_prompt(
+    prompt = _image_prompt(
         tema=tema, tono=tono, formato=formato, titulo=titulo, with_references=bool(refs),
     )
     data_url = generate_image(
@@ -461,7 +461,7 @@ def generate_content():
 
     try:
         raw = generate_text(
-            _content_prompt_tarot(
+            _content_prompt(
                 tema=tema,
                 plataforma=plataforma,
                 tono=tono,
@@ -469,7 +469,7 @@ def generate_content():
                 cantidad=cantidad,
             ),
             system=(
-                "Eres social media manager senior para marca personal de tarot. "
+                "Eres social media manager senior para pequeños negocios. "
                 "Escribes ideas concretas, aplicables y fáciles de publicar."
             ),
             temperature=0.85,
@@ -488,7 +488,7 @@ def generate_content():
             imagen_path = None
             if generar_imagen:
                 try:
-                    imagen_path = _generate_and_save_tarot_image(
+                    imagen_path = _generate_and_save_image(
                         tema=tema,
                         tono=tono,
                         formato=formato,
@@ -518,7 +518,7 @@ def generate_content():
         imagen_path = None
         if generar_imagen:
             try:
-                imagen_path = _generate_and_save_tarot_image(
+                imagen_path = _generate_and_save_image(
                     tema=tema, tono=tono, formato=formato,
                     reference_paths=reference_paths,
                 )
@@ -552,11 +552,11 @@ def generate_post_image(pid):
         return redirect(url_for("social.edit_post", pid=pid))
 
     p = Publicacion.query.get_or_404(pid)
-    tema = (request.form.get("tema") or p.titulo or "tarot espiritual").strip()
-    tono = (request.form.get("tono") or "místico").strip()
+    tema = (request.form.get("tema") or p.titulo or "el servicio principal del negocio").strip()
+    tono = (request.form.get("tono") or "cercano").strip()
     formato = (request.form.get("formato") or "post").strip()
     try:
-        p.imagen_path = _generate_and_save_tarot_image(
+        p.imagen_path = _generate_and_save_image(
             tema=tema,
             tono=tono,
             formato=formato,
@@ -587,7 +587,7 @@ def quick_generate():
         return redirect(url_for("social.index"))
 
     reference_paths = _selected_references_from_form()
-    tono = "místico"
+    tono = "cercano"
     formato = request.form.get("formato") or "post"
     plataforma = (request.form.get("plataforma") or "instagram").strip()
     fecha_prog = _parse_dt(request.form.get("fecha_programada"))
@@ -595,10 +595,10 @@ def quick_generate():
 
     try:
         raw = generate_text(
-            _content_prompt_tarot(
+            _content_prompt(
                 tema=tema, plataforma=plataforma, tono=tono, formato=formato, cantidad=1,
             ),
-            system="Eres social media manager para tarotista. Respuestas cortas y publicables.",
+            system="Eres social media manager para pequeños negocios. Respuestas cortas y publicables.",
             temperature=0.8,
             max_tokens=700,
         )
@@ -609,7 +609,7 @@ def quick_generate():
                 titulo = line.split(":", 1)[-1].strip()[:180]
                 break
 
-        imagen_path = _generate_and_save_tarot_image(
+        imagen_path = _generate_and_save_image(
             tema=tema, tono=tono, formato=formato, titulo=titulo,
             reference_paths=reference_paths,
         )
@@ -646,18 +646,18 @@ def imagen_directa():
 
         descripcion = (request.form.get("descripcion") or "").strip()
         formato = (request.form.get("formato") or "post").strip()
-        tono = (request.form.get("tono") or "místico").strip()
+        tono = (request.form.get("tono") or "cercano").strip()
         if not descripcion:
             flash("Describe qué imagen quieres crear.", "error")
             return redirect(url_for("social.imagen_directa"))
 
         reference_paths = _selected_references_from_form()
-        prompt_usado = _tarot_image_prompt(
+        prompt_usado = _image_prompt(
             tema=descripcion, tono=tono, formato=formato,
             with_references=bool(reference_paths),
         )
         try:
-            imagen_path = _generate_and_save_tarot_image(
+            imagen_path = _generate_and_save_image(
                 tema=descripcion,
                 tono=tono,
                 formato=formato,

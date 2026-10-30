@@ -182,8 +182,8 @@ def generate_from_material(mid):
         if generar_imagenes and idx < 5:
             try:
                 prompt = (
-                    f"Imagen para Instagram de tarotista, tema: {item.get('titulo', 'tarot')}. "
-                    f"Estética mística elegante, sin texto en la imagen."
+                    f"Imagen para Instagram de un pequeño negocio, tema: {item.get('titulo', 'servicio')}. "
+                    f"Estética limpia y elegante, sin texto en la imagen."
                 )
                 data_url = generate_image(prompt, aspect_ratio="1:1")
                 imagen_path = save_data_url_image(
@@ -245,7 +245,7 @@ def estudio():
             return redirect(url_for("publicidad.estudio"))
 
         estilo = (request.form.get("estilo") or "variacion").strip()
-        tema = (request.form.get("tema") or "tarot y espiritualidad").strip()
+        tema = (request.form.get("tema") or "el servicio principal del negocio").strip()
         plataforma = (request.form.get("plataforma") or "instagram").strip()
         tono = (request.form.get("tono") or "cercano").strip()
         generar_imagen = bool(request.form.get("generar_imagen"))
@@ -266,7 +266,7 @@ def estudio():
                         estilo=estilo, tema=tema, plataforma=plataforma, tono=tono,
                     )
                     + (f"\n\nVariación #{n + 1}: busca un ángulo distinto." if cantidad > 1 else ""),
-                    system="Eres copywriter creativo para tarotista en redes sociales.",
+                    system="Eres copywriter creativo en redes sociales para pequeños negocios.",
                     temperature=0.9,
                     max_tokens=1200,
                 )

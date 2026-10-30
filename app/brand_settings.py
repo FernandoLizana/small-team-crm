@@ -1,30 +1,30 @@
 import os
 
 CONTENT_TEMPLATES = {
-    "luna_nueva": {
-        "label": "Luna nueva",
-        "tema": "Ritual de luna nueva, intenciones y manifestación consciente",
-        "hashtags": "#lunanueva #tarot #ritual #manifestacion #energia",
+    "lanzamiento": {
+        "label": "Lanzamiento",
+        "tema": "Presentación de un producto o servicio nuevo del negocio",
+        "hashtags": "#novedad #lanzamiento #pyme #emprendimiento",
     },
-    "amor": {
-        "label": "Lectura de amor",
-        "tema": "Lectura de tarot para claridad en el amor y vínculos",
-        "hashtags": "#tarotamor #amorpropio #tarot #lecturadetarot",
+    "cliente": {
+        "label": "Caso de cliente",
+        "tema": "Historia breve de un cliente y el problema que resolvió",
+        "hashtags": "#clientes #testimonio #pyme #servicio",
     },
-    "abundancia": {
-        "label": "Abundancia",
-        "tema": "Limpieza energética y apertura a la abundancia",
-        "hashtags": "#abundancia #tarot #limpiezaenergetica #prosperidad",
+    "tip": {
+        "label": "Tip útil",
+        "tema": "Consejo práctico relacionado con el rubro del negocio",
+        "hashtags": "#tips #consejos #pyme #aprende",
     },
-    "autocuidado": {
-        "label": "Autocuidado",
-        "tema": "Mensaje de autocuidado espiritual y conexión interior",
-        "hashtags": "#autocuidado #tarot #bienestar #espiritualidad",
+    "equipo": {
+        "label": "Detrás de escena",
+        "tema": "Cómo trabaja el equipo en el día a día",
+        "hashtags": "#equipo #detrasdeescena #pyme #trabajo",
     },
     "servicio": {
-        "label": "Promo lectura",
-        "tema": "Invitación suave a agendar lectura de tarot personalizada",
-        "hashtags": "#tarot #lecturadetarot #tarotista #agendatulectura",
+        "label": "Promo servicio",
+        "tema": "Invitación suave a agendar o comprar el servicio principal",
+        "hashtags": "#servicio #agenda #pyme #emprendimiento",
     },
 }
 

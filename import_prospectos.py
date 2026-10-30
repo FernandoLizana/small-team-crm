@@ -223,7 +223,7 @@ def main() -> int:
     parser.add_argument(
         "--nicho",
         default=None,
-        help="Nicho por defecto (ej. 'tarot / espiritualidad')",
+        help="Nicho por defecto (ej. 'cafetería')",
     )
     parser.add_argument(
         "--responsable",
